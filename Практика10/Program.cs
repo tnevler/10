@@ -157,7 +157,7 @@ namespace Практика10
         static void Main(string[] args)
         {
             NewList<MyElem<int, int>> list = new NewList<MyElem<int, int>>();
-            bool ok = true;
+            bool ok = false; 
             //построчное чтение 
             try
             {
@@ -170,6 +170,7 @@ namespace Практика10
                     {
                         try
                         {
+                            ok = true;
                             i++;
                             int number = Convert.ToInt32(s);
                             int pow = number / 10;
@@ -188,24 +189,7 @@ namespace Практика10
                         break;
                     }
                 }
-                f.Close();
-                if (ok)
-                {
-                    int x = -100;
-                    NewList<int> X = new NewList<int>();
-                    do
-                    {
-                        x = ReadIntNumber("Введите x:", -10, 11);
-                        X.Add(x);
-                    } while (x != 0);
-                    double y = 0;
-                    foreach (int x1 in X)
-                    {
-                        y = FindY(x1, list);
-                        Console.WriteLine("x = {0} y = {1}", x1, y);
-                    }
-                }
-                else Console.WriteLine("Информация в файле указана неправильно!");
+                f.Close();                
             }
             catch (FileNotFoundException e)
             {
@@ -219,6 +203,23 @@ namespace Практика10
                 Console.WriteLine("Error: " + e.Message);
                 return;
             }
+            if (ok)
+            {
+                int x = -100;
+                NewList<int> X = new NewList<int>();
+                do
+                {
+                    x = ReadIntNumber("Введите x:", -10, 11);
+                    X.Add(x);
+                } while (x != 0);
+                double y = 0;
+                foreach (int x1 in X)
+                {
+                    y = FindY(x1, list);
+                    Console.WriteLine("x = {0} y = {1}", x1, y);
+                }
+            }
+            else Console.WriteLine("Информация в файле указана неправильно!");
 
 
             Console.ReadKey();
